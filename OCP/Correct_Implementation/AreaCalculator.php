@@ -2,21 +2,31 @@
 
 class AreaCalculator
 {
-  protected $shapes;
-
-  public function __construct($shapes = array()){
-    $this->shapes = $shapes;
-  }
-
-  public function calculate()
+  
+  /**
+   * Obtém o cálculo da soma de todas as áreas dos objetos inclusos no array
+   * @param array $shapes
+   * @return float
+   */
+  public function calculate($shapes = array())
   {
     $area = [];
 
-    foreach ($this->shapes as $shape) {
-      $area[] = $shape->area();
+    foreach ($shapes as $shape) {
+      $area[] = $this->getCalculation($shape);
     }
-
+    
     return array_sum($area);
 
+  }
+
+  /**
+   * Obtém o cálculo da área através da interface
+   * @param ShapeInterface
+   * @return float
+   */
+  public function getCalculation(ShapeInterface $shapeInterface)
+  {
+    return $shapeInterface->area();
   }
 }
